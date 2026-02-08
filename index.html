@@ -16,7 +16,6 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      transition: background-image 0.6s ease-in-out;
     }
 
     #app {
@@ -26,7 +25,6 @@
       border-radius: 28px;
       padding: 64px 24px 48px;
       text-align: center;
-      box-shadow: none;
       position: relative;
     }
 
@@ -36,13 +34,22 @@
       margin: 0 0 64px 0;
     }
 
+    .final-text {
+      color: white;
+      font-size: 12vw;
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.05;
+      text-align: center;
+      width: 100vw;
+    }
+
     .buttons {
       display: flex;
       justify-content: center;
       align-items: center;
       gap: 80px;
       min-height: 160px;
-      position: relative;
     }
 
     button {
@@ -59,13 +66,11 @@
     button.yes {
       background: linear-gradient(135deg, #3b82f6, #2563eb);
       color: white;
-      z-index: 2;
     }
 
     button.no {
       background: #bfdbfe;
       color: #1e3a8a;
-      z-index: 3;
     }
 
     @keyframes pulse {
@@ -82,11 +87,13 @@
 <body>
   <div id="app"></div>
 
-  <audio id="trumpet" preload="auto" src="trumpet.mp3"></audio>
+  <audio id="gasp" preload="auto" src="gasp.mp3"></audio>
+  <audio id="yay" preload="auto" src="yay.mp3"></audio>
 
   <script>
     const app = document.getElementById('app');
-    const trumpet = document.getElementById('trumpet');
+    const gasp = document.getElementById('gasp');
+    const yay = document.getElementById('yay');
 
     const backgrounds = [
       'intro.jpg',
@@ -140,6 +147,11 @@
       yesBtn.onclick = celebrate;
 
       noBtn.onclick = function () {
+        try {
+          gasp.currentTime = 0;
+          gasp.play();
+        } catch (e) {}
+
         noCount++;
         yesScale += 0.3;
         noScale = Math.max(0.25, noScale - 0.18);
@@ -154,12 +166,12 @@
 
     function celebrate() {
       try {
-        trumpet.currentTime = 0;
-        trumpet.play();
+        yay.currentTime = 0;
+        yay.play();
       } catch (e) {}
 
       document.body.style.backgroundImage = "url('capybara.jpg')";
-      app.innerHTML = '<h1>hell yeah im a baller.</h1>';
+      app.innerHTML = '<div class="final-text">HELL YEAH<br>IM A<br>BALLER</div>';
     }
 
     renderQuestion();
