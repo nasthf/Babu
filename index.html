@@ -88,11 +88,13 @@
   <div id="app"></div>
 
   <audio id="gasp" preload="auto" src="gasp.mp3"></audio>
+  <audio id="hehe" preload="auto" src="hehe.mp3"></audio>
   <audio id="yay" preload="auto" src="yay.mp3"></audio>
 
   <script>
     const app = document.getElementById('app');
     const gasp = document.getElementById('gasp');
+    const hehe = document.getElementById('hehe');
     const yay = document.getElementById('yay');
 
     const backgrounds = [
@@ -148,8 +150,13 @@
 
       noBtn.onclick = function () {
         try {
-          gasp.currentTime = 0;
-          gasp.play();
+          if (noCount === 5) {
+            hehe.currentTime = 0;
+            hehe.play();
+          } else {
+            gasp.currentTime = 0;
+            gasp.play();
+          }
         } catch (e) {}
 
         noCount++;
